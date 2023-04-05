@@ -4,7 +4,7 @@ let todosList = document.querySelector('.todo__list');
 let header = document.querySelector('.duplicate__block');
 let duplicateB = document.querySelector('.duplicate__block');
 
-let todosArr = [];
+let todosArr = JSON.parse(localStorage.getItem('todos')) || [];
 
 
 function addTodo(text){
@@ -15,6 +15,7 @@ function addTodo(text){
     }
 
     todosArr.push(todo);
+    localStorage.setItem('todos', JSON.stringify(todosArr));
 }
 
 
@@ -22,6 +23,7 @@ function deleteTodo(id){
     todosArr.forEach(todo => {
         if(todo.id == id){
             todo.done = true;
+            localStorage.setItem('todos', JSON.stringify(todosArr));
         }
     })
 }
@@ -164,3 +166,5 @@ document.addEventListener('keyup', function(e){
         }
     }
 })
+
+render();
